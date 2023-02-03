@@ -12,7 +12,8 @@ public:
     MyClient(HTTPClient &http_, WiFiClient &client_) // Constructor. Los parámetros son pasados por referencia.
     {
         http = &http_;     // Asigno la referencia de memoria al puntero
-        client = &client_; // Asigno la referencia de memoria al puntero
+        client = &client_; // Asigno la referencia de memoria al puntero'
+        http->setTimeout(10000);
     }
 
     String httpGETRequest(String url)
@@ -58,16 +59,17 @@ public:
         }
     }
 
-    void httpPOSTRequest(String url, String msj)
+    int httpPOSTRequest(String url, String msj)
     {
         // Serial.println("1");
+        int httpCode = -9999;
         if (WiFi.status() == WL_CONNECTED) // Verifica si hay conexión. Si no no hace nada
         {
             if (http->begin(*client, url)) // Iniciar conexión. Debo ponerle * a cliente porque es un puntero y yo debo pasarle un objeto al asignarle nuevamente * pasa el objeto y no el puntero
             {
                 http->addHeader("Content-Type", "text/plain"); // añade cabecera
 
-                int httpCode = http->POST(msj); // Realiza el POST
+                httpCode = http->POST(msj); // Realiza el POST
 
                 if (httpCode > 0) // Si no hay error en el POST. (Si hay error el POST devuelve valores negativos)
                 {
@@ -93,6 +95,7 @@ public:
         {
             Serial.printf("WiFi not connected\n");
         }
+        return httpCode;
     }
 };
 #endif

@@ -1,3 +1,6 @@
+# 1 "C:\\Users\\lucas\\AppData\\Local\\Temp\\tmpysgpxt_i"
+#include <Arduino.h>
+# 1 "C:/Users/lucas/Dropbox/Arduino/Arduino/fault-generator/src/main.ino"
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
@@ -10,12 +13,12 @@
 #include "sideEffect.h"
 #define FAULT_GENERATOR 0
 #define FIREWORKS 1
-#define TYPE FIREWORKS  
-// #include "server.h"
+#define TYPE FIREWORKS
+
 char *ssid = "SeVaLaVida 2.4GHz";
 char *password = "00436003571";
-// char *ssid = "Fibertel casaMi 2.4GHz_EXT";
-// char *password = "NEWELLS1974";
+
+
 #if TYPE == FAULT_GENERATOR
 IPAddress ip = IPAddress(192, 168, 0, 250);
 #else
@@ -24,9 +27,9 @@ IPAddress ip = IPAddress(192, 168, 0, 251);
 IPAddress gateway(192, 168, 0, 1);
 IPAddress subnet(255, 255, 255, 0);
 Connection connection = Connection(ssid, password, ip, gateway, subnet);
-// Server server = Server(80);
+
 ESP8266WebServer server = ESP8266WebServer(80);
-// Cliente
+
 HTTPClient http;
 WiFiClient client;
 MyClient myClient = MyClient(http, client);
@@ -36,7 +39,9 @@ FaultGenerator faultGenerator = FaultGenerator(&server, &myClient);
 #else
 SideEffect sideEffect = SideEffect(&server, &myClient);
 #endif
-
+void setup();
+void loop();
+#line 40 "C:/Users/lucas/Dropbox/Arduino/Arduino/fault-generator/src/main.ino"
 void setup()
 {
   pinMode(D5, OUTPUT);

@@ -16,7 +16,9 @@ private:
 
     void start()
     {
+        Serial.println("Counting...");
         delay(2000);
+        Serial.println("Start!");
         digitalWrite(D5, HIGH);
         delay(2000);
         digitalWrite(D5, LOW);
@@ -24,6 +26,8 @@ private:
 
     void handleStart()
     {
+        server->send(204);
+        Serial.println("Send confirm...");
         String url = "http://192.168.250";
         myClient->httpPOSTRequest(url + "/started", "");
         start();

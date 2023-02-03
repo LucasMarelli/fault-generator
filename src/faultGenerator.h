@@ -28,8 +28,10 @@ private:
         server->send(200, "text/html", main);
     }
 
-    void generateFault()
+    void handleStart()
     {
+        Serial.print("Fault!");
+        server->send(204);
         digitalWrite(D5, HIGH);
         delay(500);
         digitalWrite(D5, LOW);
@@ -52,12 +54,12 @@ public:
         { this->handleRoot(); };
         callback handleFault_ = [this]()
         { this->handleFault(); };
-        callback generateFault_ = [this]()
-        { this->generateFault(); };
+        callback handleStart_ = [this]()
+        { this->handleStart(); };
 
         server->on("/", handleRoot_);
         server->on("/fault", handleFault_);
-        server->on("/started", generateFault_);
+        server->on("/started", handleStart_);
     }
 };
 #endif

@@ -17,9 +17,16 @@ private:
     void handleFault()
     {
         String fault = FAULT_page;
-        server->send(200, "text/html", fault);
         String url = "http://192.168.251";
-        myClient->httpPOSTRequest(url + "/start", "");
+        int code = myClient->httpPOSTRequest(url + "/start", "");
+        if (code >= 200 || code <= 299)
+        {
+            server->send(200, "text/html", fault);
+        }
+        else
+        {
+            server->send(400, "text/plain", "Error intenrar de nuevo");
+        }
     }
 
     void handleRoot()

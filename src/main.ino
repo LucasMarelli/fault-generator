@@ -10,10 +10,14 @@
 #include "sideEffect.h"
 #define FAULT_GENERATOR 0
 #define FIREWORKS 1
-#define TYPE FIREWORKS  
+#define TYPE FAULT_GENERATOR
 // #include "server.h"
 char *ssid = "SeVaLaVida 2.4GHz";
 char *password = "00436003571";
+// char *ssid = "Se Va La Vida Quincho";
+// char *password = "baltivar";
+// char *ssid = "Codice";
+// char *password = "0141603350";
 // char *ssid = "Fibertel casaMi 2.4GHz_EXT";
 // char *password = "NEWELLS1974";
 #if TYPE == FAULT_GENERATOR
